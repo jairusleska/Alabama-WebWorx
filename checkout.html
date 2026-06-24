@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subscribe — Alabama WebWorx</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<style>
+  :root {
+    --bg: #0A0A0C; --bg-card: #16161D; --line: #26262F;
+    --white: #FFFFFF; --grey: #9A9AA8; --grey-dim: #6B6B78;
+    --violet: #7C5CFC; --violet-bright: #9D7FFF; --glow: #8B6CFF;
+    --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--white); font-family: var(--font-body); min-height: 100vh; }
+  a { color: inherit; text-decoration: none; }
+
+  header.site-nav { padding: 20px 32px; border-bottom: 1px solid var(--line); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: var(--font-display); font-weight: 700; font-size: 17px; display: flex; align-items: center; gap: 8px; }
+  .logo .mark { width: 8px; height: 8px; background: var(--violet); border-radius: 2px; box-shadow: 0 0 10px var(--glow); }
+  .back-link { font-size: 13.5px; color: var(--grey); font-weight: 600; }
+  .back-link:hover { color: var(--violet-bright); }
+
+  .checkout-wrap { max-width: 880px; margin: 0 auto; padding: 60px 32px 100px; }
+  .checkout-head { text-align: center; margin-bottom: 40px; }
+  .checkout-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--violet-bright); margin-bottom: 14px; }
+  .checkout-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); font-weight: 700; margin-bottom: 10px; }
+  .checkout-sub { font-size: 15.5px; color: var(--grey); }
+
+  .plan-summary { background: var(--bg-card); border: 1px solid var(--line); border-radius: 16px; padding: 24px 28px; margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center; }
+  .plan-summary-name { font-family: var(--font-display); font-size: 19px; font-weight: 700; }
+  .plan-summary-desc { font-size: 13.5px; color: var(--grey-dim); margin-top: 4px; }
+  .plan-summary-price { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--violet-bright); }
+  .plan-summary-price span { font-size: 13px; color: var(--grey-dim); font-family: var(--font-body); font-weight: 500; }
+
+  #checkout-container { background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px; padding: 8px; min-height: 400px; }
+  .loading-msg { text-align: center; padding: 80px 20px; color: var(--grey); font-size: 14px; }
+  .error-msg { text-align: center; padding: 40px 20px; color: #FF8A7A; font-size: 14px; background: rgba(255,107,107,0.08); border-radius: 14px; }
+
+  .setup-note { max-width: 760px; margin: 40px auto 0; padding: 20px 24px; background: rgba(124,92,252,0.06); border: 1px solid var(--violet); border-radius: 14px; font-size: 13.5px; color: var(--grey); line-height: 1.6; }
+  .setup-note code { color: var(--violet-bright); }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><span class="mark"></span>Alabama WebWorx</a>
+    <a href="index.html#pricing" class="back-link">← Back to pricing</a>
+  </div>
+</header>
+
+<div class="checkout-wrap">
+  <div class="checkout-head">
+    <p class="checkout-eyebrow">Secure checkout via Stripe</p>
+    <h1 class="checkout-title">Complete your subscription</h1>
+    <p class="checkout-sub">Your card details are encrypted and processed securely by Stripe — we never see or store them.</p>
+  </div>
+
+  <div class="plan-summary" id="planSummary">
+    <div>
+      <div class="plan-summary-name" id="planName">Loading plan...</div>
+      <div class="plan-summary-desc" id="planDesc"></div>
+    </div>
+    <div class="plan-summary-price" id="planPrice"></div>
+  </div>
+
+  <div id="checkout-container">
+    <div class="loading-msg" id="loadingMsg">Loading secure payment form…</div>
+  </div>
+
+  <div class="setup-note">
+    <strong>Note for site owner:</strong> This embedded checkout requires a one-time setup: add your Stripe secret key and the three Price IDs as environment variables in your Vercel project (Settings → Environment Variables: <code>STRIPE_SECRET_KEY</code>, <code>STRIPE_PRICE_STARTER</code>, <code>STRIPE_PRICE_GROWTH</code>, <code>STRIPE_PRICE_PRO</code>), then redeploy. See the setup guide provided alongside this file.
+  </div>
+</div>
+
+<script>
+  const PLAN_INFO = {
+    starter: { name: 'Starter Plan', desc: '1 update/month · email support', price: '$79', period: '/mo' },
+    growth:  { name: 'Growth Plan', desc: 'Unlimited updates · priority support', price: '$129', period: '/mo' },
+    pro:     { name: 'Pro Plan', desc: 'Booking features · same-day support', price: '$199', period: '/mo' },
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const plan = params.get('plan') || 'starter';
+  const info = PLAN_INFO[plan] || PLAN_INFO.starter;
+
+  document.getElementById('planName').textContent = info.name;
+  document.getElementById('planDesc').textContent = info.desc;
+  document.getElementById('planPrice').innerHTML = `${info.price}<span>${info.period}</span>`;
+
+  const stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY_HERE');
+
+  async function initCheckout() {
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan }),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error || 'Could not start checkout');
+      }
+
+      const { clientSecret } = await response.json();
+      document.getElementById('loadingMsg').style.display = 'none';
+
+      const checkout = await stripe.initEmbeddedCheckout({ clientSecret });
+      checkout.mount('#checkout-container');
+    } catch (err) {
+      document.getElementById('checkout-container').innerHTML =
+        `<div class="error-msg">Couldn't load the payment form (${err.message}). This usually means the backend setup step hasn't been completed yet — see the note below, or contact Alabama WebWorx directly to subscribe.</div>`;
+    }
+  }
+
+  initCheckout();
+</script>
+
+</body>
+</html>

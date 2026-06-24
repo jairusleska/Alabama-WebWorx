@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal & Agreements — Alabama WebWorx</title>
+<meta name="description" content="Service terms, payment policy, ownership, and liability terms for Alabama WebWorx clients.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0A0A0C; --bg-raised: #131318; --bg-card: #16161D; --line: #26262F;
+    --white: #FFFFFF; --grey: #9A9AA8; --grey-dim: #6B6B78;
+    --violet: #7C5CFC; --violet-bright: #9D7FFF; --violet-dim: #5B43C4; --glow: #8B6CFF;
+    --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--white); font-family: var(--font-body); line-height: 1.5; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  .glow-orb { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; }
+  .glow-1 { width: 560px; height: 560px; background: radial-gradient(circle, rgba(124,92,252,0.3), transparent 70%); top: -200px; left: 50%; transform: translateX(-50%); }
+
+  header.site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(10,10,12,0.7); backdrop-filter: blur(16px) saturate(1.4); border-bottom: 1px solid var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; max-width: 1280px; margin: 0 auto; }
+  .logo { font-family: var(--font-display); font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 9px; white-space: nowrap; }
+  .logo .mark { width: 9px; height: 9px; background: var(--violet); border-radius: 2px; box-shadow: 0 0 12px var(--glow); }
+  nav.nav-links { display: flex; gap: 30px; font-size: 14px; font-weight: 600; align-items: center; }
+  nav.nav-links > a { color: var(--grey); transition: color 0.2s; }
+  nav.nav-links > a:hover, nav.nav-links > a.active { color: var(--white); }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > span { cursor: pointer; color: var(--grey); display: flex; align-items: center; gap: 5px; }
+  .nav-dropdown:hover > span { color: var(--white); }
+  .caret { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); }
+  .dropdown-menu { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%) translateY(-8px); background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 24px 60px -16px rgba(0,0,0,0.6); padding: 8px; min-width: 230px; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; }
+  .nav-dropdown:hover .dropdown-menu { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .dropdown-menu a { display: block; padding: 11px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: var(--white); }
+  .dropdown-menu a:hover { background: var(--bg-raised); }
+  .dropdown-menu a .ddesc { display: block; font-size: 11.5px; color: var(--grey-dim); font-weight: 400; margin-top: 2px; }
+  .nav-cta { background: var(--violet); color: var(--white); padding: 9px 18px; border-radius: 100px; font-size: 13.5px; font-weight: 600; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--violet-bright); transform: translateY(-1px); box-shadow: 0 4px 20px -4px var(--glow); }
+  @media (max-width: 900px) { nav.nav-links { display: none; } }
+
+  .page-hero { padding: 150px 32px 60px; text-align: center; max-width: 780px; margin: 0 auto; position: relative; }
+  .page-eyebrow {
+    font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--violet-bright);
+    margin-bottom: 24px; display: inline-flex; border: 1px solid var(--line); padding: 7px 16px; border-radius: 100px; background: rgba(124,92,252,0.06);
+  }
+  .page-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 5.5vw, 60px); letter-spacing: -0.02em; line-height: 1.06; margin-bottom: 22px; position: relative; z-index: 1; }
+  .page-title .accent { background: linear-gradient(135deg, var(--violet-bright), #C4B5FF); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .page-sub { font-size: 17px; color: var(--grey); line-height: 1.6; position: relative; z-index: 1; }
+
+  .legal-grid { max-width: 1000px; margin: 0 auto; padding: 0 32px 60px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; position: relative; z-index: 1; }
+  @media (max-width: 700px) { .legal-grid { grid-template-columns: 1fr; } }
+  .legal-card { background: var(--bg-card); border: 1px solid var(--line); border-radius: 16px; padding: 30px 28px; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; cursor: pointer; }
+  .legal-card:hover { transform: translateY(-5px); border-color: var(--violet-dim); box-shadow: 0 20px 50px -20px rgba(124,92,252,0.3); }
+  .legal-card-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(124,92,252,0.1); border: 1px solid var(--violet-dim); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; font-family: var(--font-mono); color: var(--violet-bright); font-weight: 700; font-size: 14px; }
+  .legal-card h3 { font-family: var(--font-display); font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+  .legal-card p { font-size: 14px; color: var(--grey); line-height: 1.55; }
+
+  .legal-detail { max-width: 780px; margin: 0 auto; padding: 0 32px 60px; }
+  .legal-section { background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px; padding: 42px; margin-bottom: 24px; }
+  .legal-section h2 { font-family: var(--font-display); font-size: 25px; font-weight: 700; margin-bottom: 18px; padding-bottom: 16px; border-bottom: 2px solid var(--violet); }
+  .legal-section p { font-size: 15px; color: var(--grey); line-height: 1.7; margin-bottom: 14px; }
+  .legal-section p:last-child { margin-bottom: 0; }
+  .legal-section .highlight {
+    background: rgba(124,92,252,0.08); border-left: 3px solid var(--violet); padding: 18px 22px; border-radius: 10px;
+    font-size: 14px; font-weight: 600; margin: 18px 0; color: var(--white);
+  }
+  .legal-note {
+    font-size: 13px; color: var(--grey-dim); text-align: center; padding: 26px; background: var(--bg-card); border: 1px solid var(--line);
+    border-radius: 14px; max-width: 780px; margin: 0 auto 80px; line-height: 1.6; position: relative; z-index: 1;
+  }
+
+  .download-cta { text-align: center; padding: 0 32px 90px; position: relative; z-index: 1; }
+  .btn-primary { background: var(--violet); color: var(--white); padding: 16px 30px; border-radius: 100px; font-weight: 600; font-size: 15px; border: none; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 8px 30px -8px var(--glow); }
+  .btn-primary:hover { background: var(--violet-bright); transform: translateY(-2px); }
+
+  footer { padding: 52px 32px; border-top: 1px solid var(--line); position: relative; z-index: 1; }
+  .footer-inner { max-width: 1180px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; }
+  .footer-logo { font-family: var(--font-display); font-weight: 700; font-size: 17px; display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .footer-logo .mark { width: 8px; height: 8px; background: var(--violet); border-radius: 2px; box-shadow: 0 0 10px var(--glow); }
+  .footer-tagline { font-size: 13px; color: var(--grey-dim); max-width: 240px; }
+  .footer-links { display: flex; gap: 48px; flex-wrap: wrap; }
+  .footer-col h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--grey-dim); margin-bottom: 14px; }
+  .footer-col a { display: block; font-size: 13.5px; color: var(--grey); margin-bottom: 10px; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-meta { font-family: var(--font-mono); font-size: 11.5px; color: var(--grey-dim); text-align: right; }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><span class="mark"></span>Alabama WebWorx</a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-dropdown">
+        <span>Resources <span class="caret"></span></span>
+        <div class="dropdown-menu">
+          <a href="how-it-works.html">How It Works<span class="ddesc">Walk through the exact process, step by step</span></a>
+          <a href="legal.html">Legal & Agreements<span class="ddesc">Service terms, contracts, and policies</span></a>
+        </div>
+      </div>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#founder">About</a>
+    </nav>
+    <a href="index.html#booking" class="nav-cta">Book a free preview</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="glow-orb glow-1"></div>
+  <p class="page-eyebrow reveal in">Plain-language terms</p>
+  <h1 class="page-title reveal in">Legal & <span class="accent">Agreements</span></h1>
+  <p class="page-sub reveal in">Everything that governs our working relationship, explained clearly. No fine print designed to confuse you.</p>
+</section>
+
+<div class="legal-grid">
+  <div class="legal-card reveal" onclick="document.getElementById('sec-scope').scrollIntoView({behavior:'smooth'})">
+    <div class="legal-card-icon">01</div>
+    <h3>Scope of Service</h3>
+    <p>What's included in the free preview and build, and what's included every month after.</p>
+  </div>
+  <div class="legal-card reveal" onclick="document.getElementById('sec-payment').scrollIntoView({behavior:'smooth'})">
+    <div class="legal-card-icon">02</div>
+    <h3>Payment Terms</h3>
+    <p>The 3-month minimum, monthly billing, and what happens with a missed payment.</p>
+  </div>
+  <div class="legal-card reveal" onclick="document.getElementById('sec-ownership').scrollIntoView({behavior:'smooth'})">
+    <div class="legal-card-icon">03</div>
+    <h3>Ownership</h3>
+    <p>You always own your content and domain. Here's exactly what that means.</p>
+  </div>
+  <div class="legal-card reveal" onclick="document.getElementById('sec-liability').scrollIntoView({behavior:'smooth'})">
+    <div class="legal-card-icon">04</div>
+    <h3>Liability</h3>
+    <p>What happens if something goes wrong, and how that risk is handled fairly.</p>
+  </div>
+</div>
+
+<div class="legal-detail">
+  <div class="legal-section reveal" id="sec-scope">
+    <h2>Scope of Service</h2>
+    <p>Alabama WebWorx designs and builds a custom website for your business at no upfront cost. You'll see a complete, working preview before any payment is required.</p>
+    <p>Once you approve the preview and select a plan, your site goes live and your monthly subscription begins. Every plan includes hosting, domain management, SSL security, and content updates (the amount varies by plan — see Pricing for details).</p>
+  </div>
+
+  <div class="legal-section reveal" id="sec-payment">
+    <h2>Payment Terms</h2>
+    <p>Subscriptions are billed monthly in advance through Stripe, a secure third-party payment processor. We never see or store your card information directly.</p>
+    <div class="highlight">There is a 3-month minimum term from your go-live date. After that, service continues month-to-month and either party can cancel with 14 days' notice.</div>
+    <p>If a payment fails or is late, you'll be notified and given 10 days to resolve it before any service interruption.</p>
+  </div>
+
+  <div class="legal-section reveal" id="sec-ownership">
+    <h2>Ownership</h2>
+    <p>You own all content you provide — your photos, business information, branding, and your domain name — at all times, no exceptions.</p>
+    <p>Alabama WebWorx retains ownership of the underlying code, design templates, and technical systems used to build your site. If you ever cancel, we'll cooperate in good faith to transfer your domain and provide your content for use elsewhere.</p>
+  </div>
+
+  <div class="legal-section reveal" id="sec-liability">
+    <h2>Liability</h2>
+    <p>We work hard to keep your site fast, secure, and online. That said, no website provider — including large companies — can guarantee 100% uptime, since hosting providers and internet infrastructure occasionally have outages outside anyone's control.</p>
+    <div class="highlight">Our liability for any issue is limited to the fees you paid in the most recent month. We are not responsible for indirect losses like lost sales or missed bookings due to downtime or errors.</div>
+    <p>This is a standard limitation used across the web design industry, and it's detailed in full in the signed Services Agreement.</p>
+  </div>
+</div>
+
+<p class="legal-note reveal">This page is a plain-language summary for convenience. The full, binding terms are in the signed Services Agreement provided to every client before their site goes live. This is general information, not legal advice — if you have specific legal questions, please consult an attorney.</p>
+
+<div class="download-cta reveal">
+  <a href="index.html#booking" class="btn-primary">Have questions? Book a call →</a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span class="mark"></span>Alabama WebWorx</div>
+      <p class="footer-tagline">Websites engineered for Tuscaloosa businesses. No build cost, ever.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#founder">About</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="legal.html">Legal & Agreements</a>
+        <a href="index.html#booking">Book a Call</a>
+      </div>
+    </div>
+    <div class="footer-meta">Tuscaloosa, AL<br>© 2026 Alabama WebWorx</div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('in'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
