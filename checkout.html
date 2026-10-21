@@ -34,8 +34,8 @@
   .plan-summary-desc { font-size: 13.5px; color: var(--grey-dim); margin-top: 4px; }
   .plan-summary-price { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--violet-bright); }
   .plan-summary-price span { font-size: 13px; color: var(--grey-dim); font-family: var(--font-body); font-weight: 500; }
-  #checkout-container { background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px; padding: 8px; min-height: 400px; }
-  .loading-msg { text-align: center; padding: 80px 20px; color: var(--grey); font-size: 14px; }
+  #loading-wrap { text-align: center; padding: 80px 20px; color: var(--grey); font-size: 14px; }
+  #checkout-container { background: var(--bg-card); border: 1px solid var(--line); border-radius: 18px; padding: 8px; min-height: 400px; display: none; }
   .error-msg { text-align: center; padding: 40px 20px; color: #FF8A7A; font-size: 14px; background: rgba(255,107,107,0.08); border-radius: 14px; }
 </style>
 </head>
@@ -59,9 +59,8 @@
     </div>
     <div class="plan-summary-price" id="planPrice"></div>
   </div>
-  <div id="checkout-container">
-    <div class="loading-msg" id="loadingMsg">Loading secure payment form…</div>
-  </div>
+  <div id="loading-wrap">Loading secure payment form…</div>
+  <div id="checkout-container"></div>
 </div>
 <script>
   const PLAN_INFO = {
@@ -88,10 +87,14 @@
         throw new Error(errData.error || 'Could not start checkout');
       }
       const { clientSecret } = await response.json();
-      document.getElementById('loadingMsg').style.display = 'none';
+      document.getElementById('loading-wrap').style.display = 'none';
+      const container = document.getElementById('checkout-container');
+      container.style.display = 'block';
       const checkout = await stripe.initEmbeddedCheckout({ clientSecret });
       checkout.mount('#checkout-container');
     } catch (err) {
+      document.getElementById('loading-wrap').style.display = 'none';
+      document.getElementById('checkout-container').style.display = 'block';
       document.getElementById('checkout-container').innerHTML =
         '<div class="error-msg"><strong>Couldn\'t load the payment form</strong><br><br>' + err.message + '<br><br>Please <a href="mailto:jairus@eda-az.com" style="color:var(--violet-bright)">contact Alabama WebWorx directly</a> to subscribe.</div>';
     }
